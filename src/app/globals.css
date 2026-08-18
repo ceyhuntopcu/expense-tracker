@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+/* `static` keeps every token in the emitted CSS — the cat-* palette is
+   referenced only from JS (SVG fills), which Tailwind can't see. */
+@theme static {
+  /* Paper & ink — warm editorial palette */
+  --color-paper: #f6f1e7;
+  --color-paper-warm: #efe7d8;
+  --color-cream: #fbf8f1;
+  --color-ink: #211d19;
+  --color-ink-soft: #4f463c;
+  --color-ink-faint: #8a7d6d;
+  --color-rule: #d9cfbe;
+  --color-rule-strong: #b8aa93;
+
+  /* Accents — used sparingly, for data only */
+  --color-moss: #29594a;
+  --color-moss-deep: #1c4437;
+  --color-oxblood: #8c3226;
+  --color-marigold: #c07a1e;
+
+  /* Category tones — muted earth range for charts */
+  --color-cat-1: #29594a;
+  --color-cat-2: #c07a1e;
+  --color-cat-3: #8c3226;
+  --color-cat-4: #5b6c8f;
+  --color-cat-5: #7d5a8c;
+  --color-cat-6: #99732c;
+  --color-cat-7: #46734f;
+  --color-cat-8: #a85d6e;
+  --color-cat-9: #6b7d70;
+  --color-cat-10: #b06b3c;
+  --color-cat-11: #4d6a76;
+  --color-cat-12: #857263;
+
+  --font-display: var(--font-fraunces), "Fraunces", georgia, serif;
+  --font-body: var(--font-newsreader), "Newsreader", georgia, serif;
+  --font-mono: var(--font-spline-mono), "Spline Sans Mono", ui-monospace, monospace;
+}
+
+html {
+  background: var(--color-paper);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-feature-settings: "liga" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle paper grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Money figures: mono with tabular numerals */
+.figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Editorial display numerals (dashboard hero) */
+.display-figure {
+  font-family: var(--font-display);
+  font-variant-numeric: lining-nums;
+  font-weight: 560;
+  letter-spacing: -0.03em;
+}
+
+/* Small caps label — section headers, table heads */
+.label-caps {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+/* Hairline rules instead of card shadows */
+.rule-t { border-top: 1px solid var(--color-rule); }
+.rule-b { border-bottom: 1px solid var(--color-rule); }
+
+.double-rule {
+  border-top: 3px double var(--color-rule-strong);
+}
+
+::selection {
+  background: var(--color-moss);
+  color: var(--color-cream);
+}
